@@ -72,3 +72,8 @@ list.addEventListener("click", (event) => {
     deleteTodo(todoKey);
   }
 });
+
+const clearAll = () => {
+  todos = [];
+  list.innerHTML = "";
+};
