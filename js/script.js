@@ -2,6 +2,28 @@ let todos = [];
 let input = document.querySelector("input[type = 'text']");
 const list = document.querySelector("#todoList");
 const addBtn = document.querySelector(".addBtn");
+let source;
+
+
+function dragStarted(event) {
+  source = event.target;
+  console.log(event.target.outerHTML)
+  event.dataTransfer.setData("text/html", event.target.innerHTML);
+  event.dataTransfer.effectAllowed = "move";
+}
+
+function draggingOver(event) {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = "move";
+}
+
+
+function dropped(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  source.innerHTML = event.target.innerHTML;
+  event.target.innerHTML = event.dataTransfer.getData("text/html");
+}
 
 
 const addTodo = (text) => {
